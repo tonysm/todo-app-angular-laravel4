@@ -1,7 +1,9 @@
 /bootstrap/compiled.php
 /vendor
+/.idea
+/node_modules
+/.vagrant
 composer.phar
-composer.lock
 .env.*.php
 .env.php
 .DS_Store
