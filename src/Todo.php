@@ -9,6 +9,6 @@ class Todo extends Model
     public static $rules = [
         'name' => 'required|min:3'
     ];
-    
+
     protected $fillable = ["name"];
 }

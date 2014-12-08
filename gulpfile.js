@@ -49,7 +49,10 @@ gulp.task('js', function() {
             config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
             config.bowerDir + '/angular/angular.js',
             config.bowerDir + '/angular-resource/angular-resource.js',
-            './resources/js/app.js'
+            './resources/js/angular/app.js',
+            './resources/js/angular/resources/Todo.js',
+            './resources/js/angular/controllers/TodosController.js'
+
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('./public/js/'));

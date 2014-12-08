@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row" ng-controller="TodosController">
+    <div class="row todo-row" ng-controller="TodosController">
         <div class="col-sm-6 todos">
             <div class="panel panel-default">
                 <div class="panel-heading">

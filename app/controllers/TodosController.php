@@ -11,7 +11,7 @@ class TodosController extends \BaseController {
 	 */
 	public function index()
 	{
-		return Todo::all();
+		return Todo::latest()->get();
 	}
 
 
