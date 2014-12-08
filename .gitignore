@@ -2,6 +2,7 @@
 /vendor
 /.idea
 /node_modules
+/.sass-cache
 /bower_components
 /.vagrant
 composer.phar
