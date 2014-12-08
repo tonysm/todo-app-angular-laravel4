@@ -23,4 +23,16 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
         Artisan::call("migrate");
     }
 
+    /**
+     * @param $method
+     * @param $uri
+     * @param array $payload
+     * @param array $parameters
+     * @return \Illuminate\Http\Response
+     */
+    protected function callJSON($method, $uri, array $payload = [], array $parameters = [])
+    {
+        return $this->call($method, $uri, $parameters, [] ,['Content-Type' => 'application/json'], json_encode($payload));
+    }
+
 }
