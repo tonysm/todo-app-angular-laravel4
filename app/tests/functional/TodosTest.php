@@ -4,6 +4,15 @@ use App\Todo;
 
 class TodosTest extends TestCase {
 
+    /**
+     * @param $count
+     * @return array
+     */
+    private function createTodos($count)
+    {
+        return Laracasts\TestDummy\Factory::times($count)->create("App\\Todo");
+    }
+
     function invalidTodos()
     {
         return [
@@ -46,11 +55,22 @@ class TodosTest extends TestCase {
         $this->assertCount(3, $data);
     }
 
-    /**
-     * @param $count
-     */
-    private function createTodos($count)
+    /** @test */
+    function it_should_delete_a_todo_task()
     {
-        Laracasts\TestDummy\Factory::times($count)->create("App\\Todo");
+        $todos = $this->createTodos(1);
+
+        $response = $this->callJSON("DELETE", "api/v1/todos/" . $todos->id);
+
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertCount(0, Todo::all());
+    }
+
+    /** @test */
+    function it_returns_error_when_trying_to_delete_tasks_that_does_not_exist()
+    {
+        $response = $this->callJSON("DELETE", "api/v1/todos/123");
+
+        $this->assertEquals(400, $response->getStatusCode());
     }
 }

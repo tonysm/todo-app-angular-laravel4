@@ -2,19 +2,34 @@
 
 use App\Todo;
 use Laracasts\Commander\CommanderTrait;
+use App\Todos\TodosRepository;
 
 class TodosController extends \BaseController {
 
     use CommanderTrait;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+    /**
+     * @var App\Todos\TodosRepository
+     */
+    private $todosRepository;
+
+    /**
+     * @param TodosRepository $todosRepository
+     */
+    function __construct(TodosRepository $todosRepository)
+    {
+        $this->todosRepository = $todosRepository;
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return mixed
+     */
 	public function index()
 	{
-		return Todo::latest()->get();
+		return $this->todosRepository->all();
 	}
 
 
@@ -49,11 +64,16 @@ class TodosController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		$todo = Todo::find($id);
+        try
+        {
+            $todo = $todo = $this->execute('App\Todos\DestroyTodoCommand', ["id" => $id]);
 
-        $todo->delete();
-
-        return Response::make($todo, 200);
+            return Response::make($todo, 200);
+        }
+        catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e)
+        {
+            return Response::make(["errors" => [$e->getMessage()]], 400);
+        }
 	}
 
 
