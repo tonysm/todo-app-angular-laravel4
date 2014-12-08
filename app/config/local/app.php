@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
 	/*
 	|--------------------------------------------------------------------------
@@ -15,4 +15,8 @@ return array(
 
 	'debug' => true,
 
-);
+    'providers' => append_config([
+        'Laracasts\Commander\CommanderServiceProvider'
+    ])
+
+];
