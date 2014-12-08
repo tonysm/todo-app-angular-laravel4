@@ -1,0 +1,2 @@
+App\Todo:
+  name: $string

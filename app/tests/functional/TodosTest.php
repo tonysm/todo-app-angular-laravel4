@@ -51,9 +51,6 @@ class TodosTest extends TestCase {
      */
     private function createTodos($count)
     {
-        foreach (range(1, $count) as $index)
-        {
-            Todo::create(["name" => "lorem todo {$index}"]);
-        }
+        Laracasts\TestDummy\Factory::times($count)->create("App\\Todo");
     }
 }
