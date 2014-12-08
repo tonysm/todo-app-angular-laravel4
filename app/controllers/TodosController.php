@@ -1,8 +1,11 @@
 <?php
 
 use App\Todo;
+use Laracasts\Commander\CommanderTrait;
 
 class TodosController extends \BaseController {
+
+    use CommanderTrait;
 
 	/**
 	 * Display a listing of the resource.
@@ -22,18 +25,20 @@ class TodosController extends \BaseController {
 	 */
 	public function store()
 	{
-		$name = Input::json("name");
-
-        $validator = Validator::make(compact("name"), Todo::$rules);
-
-        if ($validator->fails())
+        try
         {
-            return Response::make(["errors" => $validator->messages()], 400);
+            $data = [
+                "name" => Input::json("name")
+            ];
+
+            $todo = $this->execute('App\Todos\CreateTodoTaskCommand', $data);
+
+            return Response::make($todo, 201);
         }
-
-        $todo = Todo::create(compact("name"));
-
-        return Response::make($todo, 201);
+        catch (\App\Exceptions\ValidationFailedException $e)
+        {
+            return Response::make(["errors" => $e->getValidator()->messages()], 400);
+        }
 	}
 
 	/**
