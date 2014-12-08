@@ -1,0 +1,21 @@
+{
+  "name": "todoapp-laravel4-angular",
+  "version": "0.0.0",
+  "authors": [
+    "Tony Messias <tonyzrp@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass-official": "~3.3.1",
+    "fontawesome": "~4.2.0",
+    "angular": "~1.3.5",
+    "angular-resource": "~1.3.5"
+  }
+}
