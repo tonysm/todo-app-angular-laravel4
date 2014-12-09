@@ -1,21 +1,20 @@
 <?php
 
-use App\Todo;
 use Laracasts\Commander\CommanderTrait;
 use App\Todos\TodosRepository;
 
-class TodosController extends \BaseController {
-
+class TodosController extends \BaseController
+{
     use CommanderTrait;
 
     /**
-     * @var App\Todos\TodosRepository
-     */
+    * @var App\Todos\TodosRepository
+    */
     private $todosRepository;
 
     /**
-     * @param TodosRepository $todosRepository
-     */
+    * @param TodosRepository $todosRepository
+    */
     function __construct(TodosRepository $todosRepository)
     {
         $this->todosRepository = $todosRepository;
@@ -23,27 +22,23 @@ class TodosController extends \BaseController {
 
 
     /**
-     * Display a listing of the resource.
-     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function index()
+    {
+        return $this->todosRepository->all();
+    }
+
+
+    /**
      * @return mixed
      */
-	public function index()
-	{
-		return $this->todosRepository->all();
-	}
-
-
-	/**
-     * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
+    public function store()
+    {
         try
         {
             $data = [
-                "name" => Input::json("name")
+            "name" => Input::json("name")
             ];
 
             $todo = $this->execute('App\Todos\CreateTodoTaskCommand', $data);
@@ -54,16 +49,14 @@ class TodosController extends \BaseController {
         {
             return Response::make(["errors" => $e->getValidator()->messages()], 400);
         }
-	}
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
         try
         {
             $todo = $todo = $this->execute('App\Todos\DestroyTodoCommand', ["id" => $id]);
@@ -74,7 +67,5 @@ class TodosController extends \BaseController {
         {
             return Response::make(["errors" => [$e->getMessage()]], 400);
         }
-	}
-
-
+    }
 }
