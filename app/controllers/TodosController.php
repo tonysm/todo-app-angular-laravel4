@@ -20,7 +20,6 @@ class TodosController extends \BaseController
         $this->todosRepository = $todosRepository;
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Collection
      */

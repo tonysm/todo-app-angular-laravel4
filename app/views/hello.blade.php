@@ -9,9 +9,9 @@
                     <h3>Todos @{{ remainingTodos }}</h3>
                 </div>
                 <div class="panel-body">
-                    <form name="addTodoForm" ng-submit="addTodo(newTodo)" novalidate>
+                    <form name="addTodoForm" ng-submit="addTodo()" novalidate>
                         <div class="form-group">
-                            <input type="text" ng-model="newTodo" class="form-control" placeholder="add a todo" required />
+                            <input type="text" ng-model="newTodo" class="form-control" placeholder="add a todo" minlength="3" required />
                         </div>
 
                         <div class="form-group">

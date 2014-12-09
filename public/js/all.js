@@ -38093,10 +38093,17 @@ angular.module("todoApp").controller("TodosController", function($scope, Todo) {
         $scope.todos = data;
     });
 
-    $scope.addTodo = function(newTodo) {
-        Todo.save({name: newTodo}, function(todo) {
+    $scope.addTodo = function() {
+        if ( ! $scope.addTodoForm.$valid)
+        {
+            console.log($scope.addTodoForm);
+            return;
+        }
+
+        Todo.save({name: $scope.newTodo}, function(todo) {
             $scope.todos.unshift(todo);
             $scope.newTodo = "";
+            $scope.addTodoForm.$setPristine();
         });
     };
 
