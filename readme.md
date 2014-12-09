@@ -5,7 +5,8 @@ This app is just an example. I used AngularJS and Laravel 4 (as a RESTful API).
 ## Installation steps
 
 I'm using Vagrant and Puphpet, so just run <code>$ vagrant up</code> and you should be good to go!
-I actually did a small script to run composer install and the migrations when you <em>up</em> your VM for the first time.
+I actually did a small script to run composer install and the migrations when you <em>start</em> your VM for the first
+time (see <code>/puphpet/files/exec-once/install-deps.sh</code>).
 
 However, in case it does not work, try running:
 
