@@ -31,9 +31,7 @@ class DestroyTodoCommandHandler implements CommandHandler
      */
     public function handle($command)
     {
-        $todo = $this->todosRepository->find($command->id);
-
-        $todo->delete();
+        $todo = $this->todosRepository->delete($command->id);
 
         $this->dispatchEventsFor($todo);
 

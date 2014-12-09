@@ -26,14 +26,11 @@ class DestroyTodoCommandHandlerTest extends \PHPUnit_Framework_TestCase {
     /** @test */
     function it_should_delete_task()
     {
-        $mockTodo = Mockery::mock('App\Todo[delete]');
+        $mockTodo = Mockery::mock('App\Todo')->makePartial();
 
-        $this->todosRepo->shouldReceive("find")
+        $this->todosRepo->shouldReceive("delete")
             ->once()
             ->andReturn($mockTodo);
-
-        $mockTodo->shouldReceive("delete")
-            ->once();
 
         $command = new DestroyTodoCommand(1);
 
@@ -45,7 +42,7 @@ class DestroyTodoCommandHandlerTest extends \PHPUnit_Framework_TestCase {
      * @test */
     function it_should_throw_model_not_found()
     {
-        $this->todosRepo->shouldReceive("find")
+        $this->todosRepo->shouldReceive("delete")
             ->andThrow(new \Illuminate\Database\Eloquent\ModelNotFoundException());
 
         $command = new DestroyTodoCommand(1);
