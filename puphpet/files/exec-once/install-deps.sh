@@ -6,5 +6,5 @@ sudo mv composer.phar /bin/composer
 sudo chown vagrant:vagrant /bin/composer
 
 sudo su vagrant
-cd ~/todo && composer install
-cd ~/todo && php artisan migrate
+cd /home/vagrant/todo && composer install
+cd /home/vagrant/todo && php artisan migrate
