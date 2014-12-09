@@ -38,7 +38,7 @@ class TodosController extends \BaseController
         try
         {
             $data = [
-            "name" => Input::json("name")
+                "name" => Input::json("name")
             ];
 
             $todo = $this->execute('App\Todos\CreateTodoTaskCommand', $data);
