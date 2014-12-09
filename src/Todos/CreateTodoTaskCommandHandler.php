@@ -4,20 +4,30 @@ use App\Todo as Task;
 use App\Exceptions\ValidationFailedException;
 use Illuminate\Validation\Factory;
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 class CreateTodoTaskCommandHandler implements CommandHandler
 {
+    use DispatchableTrait;
+
     /**
      * @var Factory
      */
     private $validator;
 
     /**
-     * @param Factory $validator
+     * @var TodosRepository
      */
-    function __construct(Factory $validator)
+    private $todosRepository;
+
+    /**
+     * @param Factory $validator
+     * @param TodosRepository $todosRepository
+     */
+    function __construct(Factory $validator, TodosRepository $todosRepository)
     {
         $this->validator = $validator;
+        $this->todosRepository = $todosRepository;
     }
 
     /**
@@ -38,7 +48,11 @@ class CreateTodoTaskCommandHandler implements CommandHandler
             throw new ValidationFailedException($validator);
         }
 
-        return Task::create(compact("name"));
+        $todo = $this->todosRepository->create(compact("name"));
+
+        $this->dispatchEventsFor($todo);
+
+        return $todo;
     }
 
 }

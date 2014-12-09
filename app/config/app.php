@@ -123,7 +123,10 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
         /* Packages providers */
-        'Laracasts\Commander\CommanderServiceProvider'
+        'Laracasts\Commander\CommanderServiceProvider',
+
+        /* Application service provider */
+        'App\Providers\EventsServiceProvider'
 
 	),
 

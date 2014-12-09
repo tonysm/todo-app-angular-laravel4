@@ -12,12 +12,15 @@ class CreateTodoTaskCommandHandlerTest  extends \TestCase {
 
     private $validator;
 
+    private $todosRepo;
+
     public function setUp()
     {
         parent::setUp();
 
         $this->validator = Mockery::mock('Illuminate\Validation\Factory');
-        $this->handler = new CreateTodoTaskCommandHandler($this->validator);
+        $this->todosRepo = Mockery::mock('App\Todos\TodosRepository');
+        $this->handler = new CreateTodoTaskCommandHandler($this->validator, $this->todosRepo);
     }
 
     /** @test */
@@ -31,12 +34,20 @@ class CreateTodoTaskCommandHandlerTest  extends \TestCase {
             ->once()
             ->andReturn($validation);
 
+        $name = "lorem ipsum";
+        $taskMock = new \App\Todo;
+        $taskMock->name = $name;
 
-        $command = new CreateTodoTaskCommand("lorem ipsum");
+        $this->todosRepo->shouldReceive("create")
+            ->with(["name" => $name])
+            ->once()
+            ->andReturn($taskMock);
+
+        $command = new CreateTodoTaskCommand($name);
 
         $todo = $this->handler->handle($command);
 
-        $this->assertEquals($todo->name, "lorem ipsum");
+        $this->assertEquals($todo->name, $name);
     }
 
     /**

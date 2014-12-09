@@ -3,11 +3,13 @@
 namespace App\Todos;
 
 use App\Todo as Task;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 class DestroyTodoCommandHandler implements CommandHandler
 {
+    use DispatchableTrait;
+
     /**
      * @var TodosRepository
      */
@@ -32,6 +34,8 @@ class DestroyTodoCommandHandler implements CommandHandler
         $todo = $this->todosRepository->find($command->id);
 
         $todo->delete();
+
+        $this->dispatchEventsFor($todo);
 
         return $todo;
     }

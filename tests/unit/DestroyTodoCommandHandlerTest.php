@@ -26,7 +26,7 @@ class DestroyTodoCommandHandlerTest extends \PHPUnit_Framework_TestCase {
     /** @test */
     function it_should_delete_task()
     {
-        $mockTodo = Mockery::mock('App\Todo');
+        $mockTodo = Mockery::mock('App\Todo[delete]');
 
         $this->todosRepo->shouldReceive("find")
             ->once()
