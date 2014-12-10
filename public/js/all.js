@@ -38082,7 +38082,14 @@ angular.module('ngResource', ['ng']).
 angular.module("todoApp", ['ngResource']);
 angular.module("todoApp")
     .factory('Todo', function($resource) {
-        return $resource('/api/v1/todos/:id');
+        return $resource('/api/v1/todos/:id', {}, {
+            'query' : {
+                isArray: true,
+                transformResponse: function(data) {
+                    return angular.fromJson(data).data;
+                }
+            }
+        });
     });
 angular.module("todoApp").controller("TodosController", function($scope, Todo) {
     $scope.newTodo = "";

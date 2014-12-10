@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "4.2.*",
-        "laracasts/commander": "~1.3.10"
+        "laracasts/commander": "~1.3.10",
+		"league/fractal": "~0.10.0"
 	},
 	"autoload": {
 		"classmap": [

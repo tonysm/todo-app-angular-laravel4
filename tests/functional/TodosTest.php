@@ -52,7 +52,7 @@ class TodosTest extends TestCase {
         $data = json_decode($response->getContent());
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertCount(3, $data);
+        $this->assertCount(3, $data->data);
     }
 
     /** @test */

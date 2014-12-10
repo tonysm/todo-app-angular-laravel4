@@ -1,5 +1,8 @@
 <?php
 
+use App\Exceptions\ValidationFailedException;
+use App\Todos\TodoTransformer;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Laracasts\Commander\CommanderTrait;
 use App\Todos\TodosRepository;
 
@@ -25,7 +28,9 @@ class TodosController extends \BaseController
      */
     public function index()
     {
-        return $this->todosRepository->all();
+        $todos = $this->todosRepository->all();
+
+        return $this->respondsWithCollection($todos, new TodoTransformer(), 200);
     }
 
 
@@ -42,11 +47,11 @@ class TodosController extends \BaseController
 
             $todo = $this->execute('App\Todos\CreateTodoTaskCommand', $data);
 
-            return Response::make($todo, 201);
+            return $this->respondsWithItem($todo, new TodoTransformer(), 201);
         }
-        catch (\App\Exceptions\ValidationFailedException $e)
+        catch (ValidationFailedException $e)
         {
-            return Response::make(["errors" => $e->getValidator()->messages()], 400);
+            return $this->responds(["errors" => $e->getValidator()->messages()], 400);
         }
     }
 
@@ -60,11 +65,11 @@ class TodosController extends \BaseController
         {
             $todo = $todo = $this->execute('App\Todos\DestroyTodoCommand', ["id" => $id]);
 
-            return Response::make($todo, 200);
+            return $this->respondsWithItem($todo, new TodoTransformer());
         }
-        catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e)
+        catch (ModelNotFoundException $e)
         {
-            return Response::make(["errors" => [$e->getMessage()]], 400);
+            return $this->responds(["errors" => [$e->getMessage()]], 400);
         }
     }
 }

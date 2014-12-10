@@ -58,4 +58,4 @@ gulp.task('js', function() {
         .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('default', ['bower', 'icons', 'css']);
+gulp.task('default', ['bower', 'icons', 'css', 'js']);
