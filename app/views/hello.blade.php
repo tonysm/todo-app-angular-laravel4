@@ -1,49 +1,54 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-@section('content')
-<div class="container">
-    <div class="row todo-row" ng-controller="TodosController">
-        <div class="col-sm-6 todos">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>Todos @{{ remainingTodos }}</h3>
-                </div>
-                <div class="panel-body">
-                    <form name="addTodoForm" ng-submit="addTodo()" novalidate>
-                        <div class="form-group">
-                            <input type="text" ng-model="newTodo" class="form-control" placeholder="add a todo" minlength="3" required />
-                        </div>
+    <!-- Application Title -->
+    <title>Todo App</title>
 
-                        <div class="form-group">
-                            <button class="btn btn-sm btn-primary">Add task</button>
-                        </div>
-                    </form>
-                    <hr/>
-                    <ul>
-                        <li ng-repeat="todo in todos">
-                            @{{ todo.name }} <smal ng-show="todo.completed_at != null">(completed)</smal>
-                            <a ng-show="todo.completed_at == null" ng-click="deleteTodo(todo)" href="">complete</a>
-                        </li>
-                        <li ng-hide="hasTodos()">Nothing to do</li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Bootstrap CSS -->
+    <link href="/css/app.css" rel="stylesheet">
+
+    <!-- Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body ng-app="todoApp">
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle Navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Todo App</a>
         </div>
-        <div class="col-sm-6 done-items">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3>Completed tasks</h3>
-                </div>
-                <div class="panel-body">
-                    <ul>
-                        <li ng-repeat="todo in completedTodos">
-                            @{{ todo.name }}
-                        </li>
-                        <li ng-hide="hasCompletedTodos()" class="not-done">No completed tasks</li>
-                    </ul>
-                </div>
-            </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+            </ul>
         </div>
     </div>
+</nav>
+
+<div ng-view="">
+
 </div>
-@stop
+
+<!-- Bootstrap JavaScript -->
+<script src="/js/all.js"></script>
+</body>
+</html>

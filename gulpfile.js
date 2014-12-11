@@ -8,7 +8,8 @@ var gulp = require('gulp'),
 var config = {
     sassPath: './resources/sass',
     jsPath: './resources/js',
-    bowerDir: './bower_components'
+    bowerDir: './bower_components',
+    templatesPath: './resources/templates'
 };
 
 gulp.task('bower', function() {
@@ -41,6 +42,12 @@ gulp.task('css', function() {
 gulp.task('watch', function() {
     gulp.watch(config.sassPath + "/**/*.scss", ['css']);
     gulp.watch(config.jsPath + '/**/*.js', ['js']);
+    gulp.watch(config.templatesPath + '/**/*.html', ['angular-templates']);
+});
+
+gulp.task('angular-templates', function() {
+    return gulp.src(config.templatesPath + '/**/*.html')
+        .pipe(gulp.dest('./public/templates'));
 });
 
 gulp.task('js', function() {
@@ -48,14 +55,14 @@ gulp.task('js', function() {
             config.bowerDir + '/jquery/dist/jquery.js',
             config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
             config.bowerDir + '/angular/angular.js',
+            config.bowerDir + '/angular-route/angular-route.js',
             config.bowerDir + '/angular-resource/angular-resource.js',
-            './resources/js/angular/app.js',
-            './resources/js/angular/resources/Todo.js',
-            './resources/js/angular/controllers/TodosController.js'
-
+            config.jsPath + '/angular/app.js',
+            config.jsPath + '/angular/resources/Todo.js',
+            config.jsPath + '/angular/controllers/TodosController.js'
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('./public/js/'));
 });
 
-gulp.task('default', ['bower', 'icons', 'css', 'js']);
+gulp.task('default', ['bower', 'icons', 'css', 'js', 'angular-templates']);
