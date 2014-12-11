@@ -1,5 +1,6 @@
 <?php namespace App\Todos;
 
+use App\Exceptions\ValidationFailedException;
 use App\Todo as Task;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
