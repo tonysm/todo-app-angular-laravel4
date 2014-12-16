@@ -1,6 +1,9 @@
-<?php namespace App\Todos;
+<?php
 
-class CreateTodoTaskCommand {
+namespace App\Tasks;
+
+class CreateTaskCommand
+{
     /**
      * @var string
      */
@@ -13,5 +16,4 @@ class CreateTodoTaskCommand {
     {
         $this->name = $name;
     }
-
 }

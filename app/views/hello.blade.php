@@ -33,19 +33,18 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Todo App</a>
+            <a class="navbar-brand" ng-href="/#/">Todo App</a>
         </div>
 
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
+                <li><a ng-href="/#/">Home</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <div ng-view="">
-
 </div>
 
 <!-- Bootstrap JavaScript -->

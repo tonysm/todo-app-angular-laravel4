@@ -3,7 +3,7 @@ angular
     .config(['$routeProvider', function($routeProvider) {
         $routeProvider
             .when('/', {
-                controller: 'TodosController',
+                controller: 'TasksController',
                 templateUrl: '/templates/home.html'
             })
             .otherwise({

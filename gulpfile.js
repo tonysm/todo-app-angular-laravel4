@@ -52,14 +52,14 @@ gulp.task('angular-templates', function() {
 
 gulp.task('js', function() {
     return gulp.src([
-            config.bowerDir + '/jquery/dist/jquery.js',
-            config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
+            // config.bowerDir + '/jquery/dist/jquery.js',
+            // config.bowerDir + '/bootstrap-sass-official/assets/javascripts/bootstrap.js',
             config.bowerDir + '/angular/angular.js',
             config.bowerDir + '/angular-route/angular-route.js',
             config.bowerDir + '/angular-resource/angular-resource.js',
             config.jsPath + '/angular/app.js',
-            config.jsPath + '/angular/resources/Todo.js',
-            config.jsPath + '/angular/controllers/TodosController.js'
+            config.jsPath + '/angular/resources/Task.js',
+            config.jsPath + '/angular/controllers/TasksController.js'
         ])
         .pipe(concat('all.js'))
         .pipe(gulp.dest('./public/js/'));

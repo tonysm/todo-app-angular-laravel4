@@ -1,24 +1,24 @@
 <?php
 
-namespace App\Todos;
+namespace App\Tasks;
 
-use App\Todo as Task;
+use App\Task;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class DestroyTodoCommandHandler implements CommandHandler
+class DestroyTaskCommandHandler implements CommandHandler
 {
     use DispatchableTrait;
 
     /**
-     * @var TodosRepository
+     * @var TasksRepository
      */
     private $todosRepository;
 
     /**
-     * @param TodosRepository $todosRepository
+     * @param TasksRepository $todosRepository
      */
-    function __construct(TodosRepository $todosRepository)
+    public function __construct(TasksRepository $todosRepository)
     {
         $this->todosRepository = $todosRepository;
     }
@@ -26,7 +26,7 @@ class DestroyTodoCommandHandler implements CommandHandler
     /**
      * Handle the command.
      *
-     * @param DestroyTodoCommand $command
+     * @param  DestroyTaskCommand $command
      * @return Task
      */
     public function handle($command)

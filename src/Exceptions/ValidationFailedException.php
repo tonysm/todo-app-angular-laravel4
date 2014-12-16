@@ -11,7 +11,7 @@ class ValidationFailedException extends \InvalidArgumentException
      */
     private $validator;
 
-    function __construct(Validator $validator)
+    public function __construct(Validator $validator)
     {
         $this->validator = $validator;
 
@@ -25,5 +25,4 @@ class ValidationFailedException extends \InvalidArgumentException
     {
         return $this->validator;
     }
-
-} 
+}

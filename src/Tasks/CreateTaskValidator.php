@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Todos;
+namespace App\Tasks;
 
 use App\Exceptions\ValidationFailedException;
 use Illuminate\Validation\Factory;
-use App\Todo as Task;
+use App\Task;
 
-class CreateTodoTaskValidator
+class CreateTaskValidator
 {
     /**
      * @var Factory
@@ -16,13 +16,13 @@ class CreateTodoTaskValidator
     /**
      * @param Factory $validator
      */
-    function __construct(Factory $validator)
+    public function __construct(Factory $validator)
     {
         $this->validator = $validator;
     }
 
     /**
-     * @param CreateTodoTaskCommand $command
+     * @param  CreateTaskCommand         $command
      * @throws ValidationFailedException
      */
     public function validate($command)
@@ -31,9 +31,8 @@ class CreateTodoTaskValidator
 
         $validator = $this->validator->make($data, Task::$rules);
 
-        if ($validator->fails())
-        {
+        if ($validator->fails()) {
             throw new ValidationFailedException($validator);
         }
     }
-} 
+}

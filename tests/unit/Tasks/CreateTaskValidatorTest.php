@@ -2,22 +2,26 @@
 
 namespace unit;
 
-use App\Todos\CreateTodoTaskCommand;
-use App\Todos\CreateTodoTaskValidator;
+use App\Tasks\CreateTaskCommand;
+use App\Tasks\CreateTaskValidator;
 use Mockery;
 
-class CreateTodoTaskValidatorTest extends \PHPUnit_Framework_TestCase
+class CreateTaskValidatorTest extends \PHPUnit_Framework_TestCase
 {
     private $validator;
+
+    /**
+     * @var CreateTaskValidator
+     */
     private $validatorHandler;
 
-    public function setUp()
+    function setUp()
     {
         $this->validator = Mockery::mock('Illuminate\Validation\Factory');
-        $this->validatorHandler = new CreateTodoTaskValidator($this->validator);
+        $this->validatorHandler = new CreateTaskValidator($this->validator);
     }
 
-    public function tearDown()
+    function tearDown()
     {
         Mockery::close();
     }
@@ -25,7 +29,7 @@ class CreateTodoTaskValidatorTest extends \PHPUnit_Framework_TestCase
     /** @test */
     function it_works_when_validation_passes()
     {
-        $command = new CreateTodoTaskCommand("lorem ipsum");
+        $command = new CreateTaskCommand("lorem ipsum");
 
         $validation = Mockery::mock('Illuminate\Validation\Validator');
 
@@ -46,7 +50,7 @@ class CreateTodoTaskValidatorTest extends \PHPUnit_Framework_TestCase
      */
     function it_should_throw_validation_failed_exception_when_validation_fails()
     {
-        $command = new CreateTodoTaskCommand("lorem ipsum");
+        $command = new CreateTaskCommand("lorem ipsum");
 
         $validation = Mockery::mock('Illuminate\Validation\Validator');
 
@@ -60,4 +64,4 @@ class CreateTodoTaskValidatorTest extends \PHPUnit_Framework_TestCase
 
         $this->validatorHandler->validate($command);
     }
-} 
+}

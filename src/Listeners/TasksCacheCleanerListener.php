@@ -4,7 +4,7 @@ namespace App\Listeners;
 
 use Illuminate\Cache\Repository;
 
-class TodoCacheCleanerListener
+class TasksCacheCleanerListener
 {
     /**
      * @var Repository
@@ -14,7 +14,7 @@ class TodoCacheCleanerListener
     /**
      * @param Repository $cache
      */
-    function __construct(Repository $cache)
+    public function __construct(Repository $cache)
     {
         $this->cache = $cache;
     }
@@ -24,6 +24,6 @@ class TodoCacheCleanerListener
      */
     public function clear($event)
     {
-        $this->cache->forget("todos_task_cache");
+        $this->cache->forget("tasks_task_cache");
     }
-} 
+}

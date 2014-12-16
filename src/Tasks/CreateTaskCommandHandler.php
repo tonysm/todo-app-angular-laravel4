@@ -1,31 +1,31 @@
-<?php namespace App\Todos;
+<?php namespace App\Tasks;
 
 use App\Exceptions\ValidationFailedException;
-use App\Todo as Task;
+use App\Task;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class CreateTodoTaskCommandHandler implements CommandHandler
+class CreateTaskCommandHandler implements CommandHandler
 {
     use DispatchableTrait;
 
     /**
-     * @var TodosRepository
+     * @var TasksRepository
      */
-    private $todosRepository;
+    private $tasksRepository;
 
     /**
-     * @param TodosRepository $todosRepository
+     * @param TasksRepository $tasksRepository
      */
-    function __construct(TodosRepository $todosRepository)
+    public function __construct(TasksRepository $tasksRepository)
     {
-        $this->todosRepository = $todosRepository;
+        $this->tasksRepository = $tasksRepository;
     }
 
     /**
      * Handle the command.
      *
-     * @param CreateTodoTaskCommand $command
+     * @param  CreateTaskCommand         $command
      * @throws ValidationFailedException
      * @return Task
      */
@@ -33,11 +33,10 @@ class CreateTodoTaskCommandHandler implements CommandHandler
     {
         $name = $command->name;
 
-        $todo = $this->todosRepository->create(compact("name"));
+        $todo = $this->tasksRepository->create(compact("name"));
 
         $this->dispatchEventsFor($todo);
 
         return $todo;
     }
-
 }

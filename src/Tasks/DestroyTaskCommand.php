@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Todos;
+namespace App\Tasks;
 
-class DestroyTodoCommand
+class DestroyTaskCommand
 {
     /**
      * @var int
@@ -16,5 +16,4 @@ class DestroyTodoCommand
     {
         $this->id = $id;
     }
-
 }

@@ -10,23 +10,22 @@ use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class BaseController extends Controller
 {
-	/**
-	 * Setup the layout used by the controller.
-	 *
-	 * @return void
-	 */
-	protected function setupLayout()
-	{
-		if ( ! is_null($this->layout))
-		{
-			$this->layout = View::make($this->layout);
-		}
-	}
+    /**
+     * Setup the layout used by the controller.
+     *
+     * @return void
+     */
+    protected function setupLayout()
+    {
+        if (! is_null($this->layout)) {
+            $this->layout = View::make($this->layout);
+        }
+    }
 
     /**
-     * @param EloquentCollection $collection
+     * @param  EloquentCollection $collection
      * @param $transformer
-     * @param int $statusCode
+     * @param  int                $statusCode
      * @return mixed
      */
     protected function respondsWithCollection(EloquentCollection $collection, $transformer, $statusCode = 200)
@@ -35,9 +34,9 @@ class BaseController extends Controller
     }
 
     /**
-     * @param Model $model
+     * @param  Model $model
      * @param $transformer
-     * @param int $statusCode
+     * @param  int   $statusCode
      * @return mixed
      */
     protected function respondsWithItem(Model $model, $transformer, $statusCode = 200)
@@ -46,8 +45,8 @@ class BaseController extends Controller
     }
 
     /**
-     * @param mixed $response
-     * @param int $statusCode
+     * @param  mixed $response
+     * @param  int   $statusCode
      * @return mixed
      */
     protected function responds($response, $statusCode = 200)
@@ -66,7 +65,7 @@ class BaseController extends Controller
     }
 
     /**
-     * @param ResourceAbstract $resourceAbstract
+     * @param  ResourceAbstract $resourceAbstract
      * @return string
      */
     protected function parseResourceToJson(ResourceAbstract $resourceAbstract)
@@ -79,7 +78,7 @@ class BaseController extends Controller
     }
 
     /**
-     * @param EloquentCollection $collection
+     * @param  EloquentCollection $collection
      * @param $transformer
      * @return string
      */

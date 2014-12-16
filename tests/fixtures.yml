@@ -1,2 +1,2 @@
-App\Todo:
+App\Task:
   name: $string

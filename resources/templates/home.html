@@ -1,14 +1,14 @@
 <div class="container">
-    <div class="row todo-row" ng-controller="TodosController">
+    <div class="row todo-row" ng-controller="TasksController">
         <div class="col-sm-6 todos">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3>Todos {{ remainingTodos }}</h3>
+                    <h3>Todos</h3>
                 </div>
                 <div class="panel-body">
-                    <form name="addTodoForm" ng-submit="addTodo()" novalidate>
+                    <form name="addTaskForm" ng-submit="addTask()" novalidate>
                         <div class="form-group">
-                            <input type="text" ng-model="newTodo" class="form-control" placeholder="add a todo" minlength="3" required />
+                            <input type="text" ng-model="newTask" class="form-control" placeholder="add a task" minlength="3" required />
                         </div>
 
                         <div class="form-group">
@@ -17,11 +17,11 @@
                     </form>
                     <hr/>
                     <ul>
-                        <li ng-repeat="todo in todos">
-                            {{ todo.name }}
-                            <a ng-show="todo.completed_at == null" ng-click="deleteTodo(todo)" href="">complete</a>
+                        <li ng-repeat="task in tasks">
+                            {{ task.name }}
+                            <a ng-show="task.completed_at == null" ng-click="deleteTask(task)" href="">complete</a>
                         </li>
-                        <li ng-hide="hasTodos()">Nothing to do</li>
+                        <li ng-hide="hasTasks()">Nothing to do</li>
                     </ul>
                 </div>
             </div>
@@ -33,10 +33,10 @@
                 </div>
                 <div class="panel-body">
                     <ul>
-                        <li ng-repeat="todo in completedTodos">
-                            {{ todo.name }}
+                        <li ng-repeat="task in completedTasks">
+                            {{ task.name }}
                         </li>
-                        <li ng-hide="hasCompletedTodos()" class="not-done">No completed tasks</li>
+                        <li ng-hide="hasCompletedTasks()" class="not-done">No completed tasks</li>
                     </ul>
                 </div>
             </div>

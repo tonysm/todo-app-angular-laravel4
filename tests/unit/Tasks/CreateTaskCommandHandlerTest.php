@@ -2,37 +2,38 @@
 
 namespace unit;
 
-use App\Todos\CreateTodoTaskCommand;
-use App\Todos\CreateTodoTaskCommandHandler;
+use App\Task;
+use App\Tasks\CreateTaskCommand;
+use App\Tasks\CreateTaskCommandHandler;
 use Mockery;
 
-class CreateTodoTaskCommandHandlerTest  extends \TestCase {
+class CreateTaskCommandHandlerTest  extends \TestCase {
 
     private $handler;
 
-    private $todosRepo;
+    private $tasksRepo;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->todosRepo = Mockery::mock('App\Todos\TodosRepository');
-        $this->handler = new CreateTodoTaskCommandHandler($this->todosRepo);
+        $this->tasksRepo = Mockery::mock('App\Tasks\TasksRepository');
+        $this->handler = new CreateTaskCommandHandler($this->tasksRepo);
     }
 
     /** @test */
     function it_should_create_task()
     {
         $name = "lorem ipsum";
-        $taskMock = new \App\Todo;
+        $taskMock = new Task;
         $taskMock->name = $name;
 
-        $this->todosRepo->shouldReceive("create")
+        $this->tasksRepo->shouldReceive("create")
             ->with(["name" => $name])
             ->once()
             ->andReturn($taskMock);
 
-        $command = new CreateTodoTaskCommand($name);
+        $command = new CreateTaskCommand($name);
 
         $todo = $this->handler->handle($command);
 

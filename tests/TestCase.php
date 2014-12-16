@@ -23,6 +23,11 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase {
         Artisan::call("migrate");
     }
 
+    public function tearDown()
+    {
+        Mockery::close();
+    }
+
     /**
      * @param $method
      * @param $uri
