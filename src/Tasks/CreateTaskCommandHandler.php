@@ -31,12 +31,10 @@ class CreateTaskCommandHandler implements CommandHandler
      */
     public function handle($command)
     {
-        $name = $command->name;
+        $task = $this->tasksRepository->create(["name" => $command->name]);
 
-        $todo = $this->tasksRepository->create(compact("name"));
+        $this->dispatchEventsFor($task);
 
-        $this->dispatchEventsFor($todo);
-
-        return $todo;
+        return $task;
     }
 }

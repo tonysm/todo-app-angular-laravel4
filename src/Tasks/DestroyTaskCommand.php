@@ -7,13 +7,13 @@ class DestroyTaskCommand
     /**
      * @var int
      */
-    public $id;
+    public $taskId;
 
     /**
-     * @param int $id
+     * @param int $taskId
      */
-    public function __construct($id)
+    public function __construct($taskId)
     {
-        $this->id = $id;
+        $this->taskId = $taskId;
     }
 }

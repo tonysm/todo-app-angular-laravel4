@@ -20,9 +20,9 @@ class TasksCacheCleanerListener
     }
 
     /**
-     * @param $event
+     * clears cache when triggered
      */
-    public function clear($event)
+    public function clear()
     {
         $this->cache->forget("tasks_task_cache");
     }

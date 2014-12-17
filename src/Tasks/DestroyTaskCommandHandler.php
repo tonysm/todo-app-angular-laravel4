@@ -31,10 +31,10 @@ class DestroyTaskCommandHandler implements CommandHandler
      */
     public function handle($command)
     {
-        $todo = $this->todosRepository->delete($command->id);
+        $task = $this->todosRepository->delete($command->taskId);
 
-        $this->dispatchEventsFor($todo);
+        $this->dispatchEventsFor($task);
 
-        return $todo;
+        return $task;
     }
 }

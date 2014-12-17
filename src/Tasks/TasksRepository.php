@@ -10,13 +10,13 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class TasksRepository
 {
     /**
-     * @param $id
+     * @param $taskId
      * @throws ModelNotFoundException
      * @return Task
      */
-    public function find($id)
+    public function find($taskId)
     {
-        return Task::findOrFail($id);
+        return Task::findOrFail($taskId);
     }
 
     /**
@@ -30,19 +30,19 @@ class TasksRepository
     }
 
     /**
-     * @param  int                    $id
+     * @param  int                    $taskId
      * @throws ModelNotFoundException
      * @return Task
      */
-    public function delete($id)
+    public function delete($taskId)
     {
-        $todo = $this->find($id);
+        $task = $this->find($taskId);
 
-        $todo->delete();
+        $task->delete();
 
-        $todo->raise(new TaskDeleted($todo->id));
+        $task->raise(new TaskDeleted($task->id));
 
-        return $todo;
+        return $task;
     }
 
     /**
@@ -51,10 +51,10 @@ class TasksRepository
      */
     public function create(array $data)
     {
-        $todo = Task::create($data);
+        $task = Task::create($data);
 
-        $todo->raise(new TaskCreated($todo->id));
+        $task->raise(new TaskCreated($task->id));
 
-        return $todo;
+        return $task;
     }
 }

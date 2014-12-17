@@ -52,13 +52,13 @@ class TasksController extends \BaseController
     }
 
     /**
-     * @param $id
+     * @param $taskId
      * @return mixed
      */
-    public function destroy($id)
+    public function destroy($taskId)
     {
         try {
-            $task = $this->execute('App\Tasks\DestroyTaskCommand', ["id" => $id]);
+            $task = $this->execute('App\Tasks\DestroyTaskCommand', ["taskId" => $taskId]);
 
             return $this->respondsWithItem($task, new TaskTransformer());
         } catch (ModelNotFoundException $e) {
